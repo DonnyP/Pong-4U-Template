@@ -293,10 +293,11 @@ namespace Pong
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // TODO draw paddles using FillRectangle
-
-
+            //e.Graphics.Fillanything(brush or something to draw with, float x, float y, float width, floath height))
+            e.Graphics.FillRectangle(drawBrush, PADDLE_EDGE, paddle1Y, PADDLE_WIDTH, PADDLE_LENGTH);
+            e.Graphics.FillRectangle(drawBrush, this.Width - PADDLE_WIDTH - PADDLE_EDGE, paddle2Y, PADDLE_WIDTH, PADDLE_LENGTH);
             // TODO draw ball using FillRectangle
-
+            e.Graphics.FillRectangle(drawBrush, ballX, ballY, BALL_SIZE, BALL_SIZE);
         }
 
     }
