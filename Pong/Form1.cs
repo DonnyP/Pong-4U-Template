@@ -143,6 +143,9 @@ namespace Pong
             SetParameters();
 
             // TODO create code to make a graphics object, a brush, and a font to display the countdown
+            Graphics formGraphics = this.CreateGraphics();
+            Font drawFont = new Font("Arial", 16, FontStyle.Bold);
+            SolidBrush drawBrush = new SolidBrush(Color.Red);            formGraphics.DrawString("Hello", drawFont, drawBrush, 50, 40);
 
             startLabel.Visible = false;
             Refresh();
@@ -180,8 +183,9 @@ namespace Pong
             }
 
             // TODO set starting X position for ball to middle of screen, (use this.Width and BALL_SIZE)
+            ballX = this.Width / 2 - BALL_SIZE / 2;
             // TODO set starting Y position for ball to middle of screen, (use this.Height and BALL_SIZE)
-
+            ballY = this.Height / 2 - BALL_SIZE / 2;
         }
 
         /// <summary>
