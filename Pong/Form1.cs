@@ -144,22 +144,26 @@ namespace Pong
 
             // TODO create code to make a graphics object, a brush, and a font to display the countdown
             Graphics formGraphics = this.CreateGraphics();
-            Font drawFont = new Font("Arial", 16, FontStyle.Bold);
-            SolidBrush drawBrush = new SolidBrush(Color.Red);            formGraphics.DrawString("Hello", drawFont, drawBrush, 50, 40);
-
+            Font drawFont = new Font("Arial", 40, FontStyle.Bold);
+            SolidBrush drawBrush = new SolidBrush(Color.White);
+            
             startLabel.Visible = false;
             Refresh();
-            
-            //countdown to start of game
-            for (; ; ) // TODO create conditions for a for loop that counts down from 3 
+               
+        //countdown to start of game
+            for (int i = 3; i >= 0; i-- ) // TODO create conditions for a for loop that counts down from 3 
             {
                 // --- create code using DrawString to display the countdown in the appropriate area.  
+                formGraphics.DrawString(Convert.ToString(i), drawFont, drawBrush, 283, 140);
                 // --- sleep for 1 second
+                Thread.Sleep(1000);
                 // --- refresh the screen
+                Refresh();
             }
             
             // TODO start the gameUpdateLoop timer
             newGameOk = false;
+            gameUpdateLoop.Enabled = true;
         }
 
         /// <summary>
@@ -201,8 +205,23 @@ namespace Pong
             #region update ball position
 
             // TODO create code to move ball either left or right based on ballMoveRight and BALL_SPEED
-
+            if (ballMoveRight == true)
+            {
+                ballX = ballX + BALL_SPEED;
+            }
+            else if (ballMoveRight == false)
+            {
+                ballX = ballX - BALL_SPEED;
+            }
             // TODO create code move ball either down or up based on ballMoveDown and BALL_SPEED
+            if (ballMoveDown == true)
+            {
+                ballY = ballY + BALL_SPEED;
+            }
+            else if (ballMoveDown == false)
+            {
+                ballY = ballY - BALL_SPEED;
+            }
 
             #endregion
 
@@ -211,14 +230,26 @@ namespace Pong
             if (aKeyDown == true && paddle1Y > 0)
             {
                 // TODO create code to move player 1 paddle up using paddle1Y and PADDLE_SPEED
+                paddle1Y = paddle1Y - PADDLE_SPEED;
             }
 
+            if (zKeyDown == true && paddle1Y > 0)
             // TODO create an if statement and code to move player 1 paddle down using paddle1Y and PADDLE_SPEED
+            {
+                paddle1Y = paddle1Y + PADDLE_SPEED;
+            }
 
+            if (jKeyDown == true && paddle2Y > 0)
             // TODO create an if statement and code to move player 2 paddle up using paddle2Y and PADDLE_SPEED
+            {
+                paddle2Y = paddle2Y - PADDLE_SPEED;
+            }
 
+            if (mKeyDown == true && paddle2Y > 0)
             // TODO create an if statement and code to move player 2 paddle down using paddle2Y and PADDLE_SPEED
-
+            {
+                paddle2Y = paddle2Y + PADDLE_SPEED;
+            }
             #endregion
 
             #region ball collision with top and bottom lines
