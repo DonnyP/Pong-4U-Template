@@ -257,10 +257,18 @@ namespace Pong
             if (ballY < 0) // if ball hits top line
             {
                 // TODO use ballMoveDown boolean to change direction
+                ballMoveDown = true;
                 // TODO play a collision sound
+                player.Play();
             }
             // TODO In an else if statement use ballY, this.Height, and BALL_SIZE to check for collision with bottom line
+            else if (ballY > this.Height - BALL_SIZE)
+            {
+                ballMoveDown = false;
+                player.Play();
+            }
             // If true use ballMoveDown down boolean to change direction
+
 
             #endregion
 
@@ -269,12 +277,16 @@ namespace Pong
             if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_LENGTH && ballX < PADDLE_EDGE + PADDLE_WIDTH) // left paddle collision
             {
                 // TODO play a "paddle hit" sound 
+                player.Play();
                 // TODO use ballMoveRight boolean to change direction
+                ballMoveRight = true;
             }
             else if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_LENGTH && ballX + BALL_SIZE > this.Width - PADDLE_EDGE - PADDLE_WIDTH / 2) // right paddle collision
             {
                 // TODO play a "paddle hit" sound 
+                player.Play();
                 // TODO use ballMoveRight boolean to change direction
+                ballMoveRight = false;
             }
 
             #endregion
@@ -286,13 +298,25 @@ namespace Pong
             if (ballX < 0)  // TODO ball hits left wall logic
             {
                 // --- play score sound
+                player.Play();
                 // --- update player 2 score
+                player2Score++;
                 // --- update player2Label with new score
+                player2Label.Text = "Player 2:  " + player2Score;
                 // --- refresh
-
+                ballX = this.Width / 2 - BALL_SIZE / 2;
+                ballY = this.Height / 2 - BALL_SIZE / 2;
+                Refresh();
                 // --- use if statement to check to see if player 2 has won the game. If true run 
+                if (player2Score == gameWinScore)
+                {
+                    GameOver("player 2"); 
+                }
                 // gameWinScore method. Else call SetParameters method to reset ball position.
-
+                else
+                {
+                SetParameters();
+                }
             }
 
             // TODO same as above but this time check for collision with the right wall
@@ -314,8 +338,11 @@ namespace Pong
 
             // TODO create game over logic
             // --- stop the gameUpdateLoop
+            gameUpdateLoop.Enabled = false;
             // --- show a message on the startLabel to indicate a winner
+
             // --- pause for two seconds 
+
             // --- use the startLabel to ask the user if they want to play again
 
         }
